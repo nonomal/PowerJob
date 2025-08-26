@@ -21,6 +21,7 @@ public class TypeStore {
     public static final TypeReference<ResultDTO<Integer>> INTEGER_RESULT_TYPE = new TypeReference<ResultDTO<Integer>>(){};
 
     public static final TypeReference<ResultDTO<Long>> LONG_RESULT_TYPE = new TypeReference<ResultDTO<Long>>(){};
+    public static final TypeReference<PowerResultDTO<Long>> LONG_POWER_RESULT_TYPE = new TypeReference<PowerResultDTO<Long>>(){};
 
     public static final TypeReference<ResultDTO<JobInfoDTO>> JOB_RESULT_TYPE = new TypeReference<ResultDTO<JobInfoDTO>>(){};
 
@@ -31,6 +32,8 @@ public class TypeStore {
     public static final TypeReference<ResultDTO<InstanceInfoDTO>> INSTANCE_RESULT_TYPE = new TypeReference<ResultDTO<InstanceInfoDTO>>() {};
 
     public static final TypeReference<ResultDTO<List<InstanceInfoDTO>>> LIST_INSTANCE_RESULT_TYPE = new TypeReference<ResultDTO<List<InstanceInfoDTO>>>(){};
+
+    public static final TypeReference<ResultDTO<PageResult<InstanceInfoDTO>>> PAGE_INSTANCE_RESULT_TYPE = new TypeReference<ResultDTO<PageResult<InstanceInfoDTO>>>(){};
 
     public static final TypeReference<ResultDTO<WorkflowInfoDTO>> WF_RESULT_TYPE = new TypeReference<ResultDTO<WorkflowInfoDTO>>() {};
 

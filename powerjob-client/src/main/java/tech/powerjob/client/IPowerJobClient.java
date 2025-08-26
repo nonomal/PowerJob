@@ -1,8 +1,10 @@
 package tech.powerjob.client;
 
+import tech.powerjob.common.request.http.RunJobRequest;
 import tech.powerjob.common.request.http.SaveJobInfoRequest;
 import tech.powerjob.common.request.http.SaveWorkflowNodeRequest;
 import tech.powerjob.common.request.http.SaveWorkflowRequest;
+import tech.powerjob.common.request.query.InstancePageQuery;
 import tech.powerjob.common.request.query.JobInfoQuery;
 import tech.powerjob.common.response.*;
 
@@ -38,6 +40,8 @@ public interface IPowerJobClient {
 
     ResultDTO<Long> runJob(Long jobId, String instanceParams, long delayMS);
 
+    PowerResultDTO<Long> runJob(RunJobRequest runJobRequest);
+
     /* ************* Instance API list ************* */
 
     ResultDTO<Void> stopInstance(Long instanceId);
@@ -49,6 +53,8 @@ public interface IPowerJobClient {
     ResultDTO<Integer> fetchInstanceStatus(Long instanceId);
 
     ResultDTO<InstanceInfoDTO> fetchInstanceInfo(Long instanceId);
+
+    ResultDTO<PageResult<InstanceInfoDTO>> queryInstanceInfo(InstancePageQuery instancePageQuery);
 
     /* ************* Workflow API list ************* */
     ResultDTO<Long> saveWorkflow(SaveWorkflowRequest request);

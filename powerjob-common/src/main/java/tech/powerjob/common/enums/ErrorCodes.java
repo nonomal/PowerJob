@@ -49,6 +49,14 @@ public enum ErrorCodes {
      * 系统内部异常
      */
     SYSTEM_UNKNOWN_ERROR("-500", "SYS_UNKNOWN_ERROR"),
+    /**
+     * 非法参数
+     */
+    ILLEGAL_ARGS_ERROR("-501", "ILLEGAL_ARGS_ERROR"),
+    /**
+     * 不允许操作
+     */
+    OPERATION_NOT_PERMITTED("-502", "OPERATION_NOT_PERMITTED"),
 
     /**
      * OPENAPI 错误码号段 -10XX

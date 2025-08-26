@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.*;
 import tech.powerjob.client.module.AppAuthRequest;
 import tech.powerjob.client.module.AppAuthResult;
 import tech.powerjob.common.OpenAPIConstant;
-import tech.powerjob.common.PowerQuery;
 import tech.powerjob.common.enums.ErrorCodes;
 import tech.powerjob.common.enums.InstanceStatus;
 import tech.powerjob.common.exception.PowerJobException;
+import tech.powerjob.common.request.http.RunJobRequest;
 import tech.powerjob.common.request.http.SaveJobInfoRequest;
 import tech.powerjob.common.request.http.SaveWorkflowNodeRequest;
 import tech.powerjob.common.request.http.SaveWorkflowRequest;
+import tech.powerjob.common.request.query.InstancePageQuery;
 import tech.powerjob.common.request.query.JobInfoQuery;
 import tech.powerjob.common.response.*;
 import tech.powerjob.server.core.instance.InstanceService;
@@ -144,8 +145,14 @@ public class OpenAPIController {
 
     @PostMapping(OpenAPIConstant.RUN_JOB)
     public ResultDTO<Long> runJob(Long appId, Long jobId, @RequestParam(required = false) String instanceParams, @RequestParam(required = false) Long delay) {
-        checkJobIdValid(jobId, appId);
-        return ResultDTO.success(jobService.runJob(appId, jobId, instanceParams, delay));
+        RunJobRequest request = new RunJobRequest().setAppId(appId).setJobId(jobId).setInstanceParams(instanceParams).setDelay(delay);
+        return runJob2(request);
+    }
+
+    @PostMapping(OpenAPIConstant.RUN_JOB2)
+    public PowerResultDTO<Long> runJob2(@RequestBody RunJobRequest runJobRequest) {
+        checkJobIdValid(runJobRequest.getJobId(), runJobRequest.getAppId());
+        return PowerResultDTO.s(jobService.runJob(runJobRequest.getAppId(), runJobRequest));
     }
 
     /* ************* Instance 区 ************* */
@@ -183,7 +190,7 @@ public class OpenAPIController {
     }
 
     @PostMapping(OpenAPIConstant.QUERY_INSTANCE)
-    public ResultDTO<List<InstanceInfoDTO>> queryInstance(@RequestBody PowerQuery powerQuery) {
+    public ResultDTO<PageResult<InstanceInfoDTO>> queryInstance(@RequestBody InstancePageQuery powerQuery) {
         return ResultDTO.success(instanceService.queryInstanceInfo(powerQuery));
     }
 
